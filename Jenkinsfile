@@ -17,10 +17,11 @@ pipeline {
                 echo "$WORKSPACE"
             }
         }
-        stage('mvn clean install'){
-            steps{
-                script{
-                sh 'mvn clean install'
+        stage('mvn clean install') {
+            steps {
+                script {
+                    sh 'mvn clean install'
+                }
             }
         }
         // stage('login to mysql and add user table in test database') {
@@ -41,10 +42,10 @@ pipeline {
         //                   PRIMARY KEY (id)
         //                 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;"
 
-        //             """
-        //             }
-        //         }
-        //     }
-        // }
+    //             """
+    //             }
+    //         }
+    //     }
+    // }
     }
 }
