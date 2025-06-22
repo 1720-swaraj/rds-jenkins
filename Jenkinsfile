@@ -45,6 +45,7 @@ pipeline {
                 script {
                     withCredentials([usernamePassword(credentialsId: 'mysql-cred', usernameVariable: 'USER_NAME', passwordVariable: 'MYSQL_PASSWORD')]) {
                         sh """
+
                     mysql -h $SQL_LINK -u $USER_NAME -p$MYSQL_PASSWORD -e "CREATE DATABASE IF NOT EXISTS test;
                         USE test;
                         CREATE TABLE IF NOT EXISTS user (
