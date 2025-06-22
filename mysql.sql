@@ -10,3 +10,4 @@ CREATE TABLE IF NOT EXISTS USER (
                           regdate DATE NOT NULL,
                           PRIMARY KEY (id)
                         ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+select * from USER;                        

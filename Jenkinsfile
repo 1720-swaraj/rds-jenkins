@@ -46,8 +46,7 @@ pipeline {
                     withCredentials([usernamePassword(credentialsId: 'mysql-cred', usernameVariable: 'USER_NAME', passwordVariable: 'MYSQL_PASSWORD')]) {
                         sh """
                     mysql -h $SQL_LINK -u $USER_NAME -p$MYSQL_PASSWORD < mysql.sql
-
-                    select * from USER
+                    
                 """
                     }
                 }
