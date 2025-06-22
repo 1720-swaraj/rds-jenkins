@@ -14,13 +14,25 @@ pipeline {
             steps {
                 cleanWs()
                 checkout scm
+                sh '$WORKSPACE'
             }
         }
-        // stage('mvn clean install'){
-        //     steps{
-        //         sh 'mvn clean install'
-        //     }
-        // }
+        stage('mvn clean install'){
+            steps{
+                script{
+                    def file = findFiles(glob: '**/*.war')
+                    if(file.length > 0){
+                        for(f in file){
+                            echo "Deleting war file"
+                            sh "rm -rf '${f.path}'"
+                        }
+                    }else{
+                        echo "No war file found"
+                    }   
+                }
+                sh 'mvn clean install'
+            }
+        }
         // stage('login to mysql and add user table in test database') {
         //     steps {
         //         script {
