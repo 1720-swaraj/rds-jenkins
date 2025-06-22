@@ -47,7 +47,7 @@ pipeline {
                         sh """
                     mysql -h $SQL_LINK -u $USER_NAME -p$MYSQL_PASSWORD < mysql.sql
 
-                    select * from test.USER
+                    select * from USER
                 """
                     }
                 }
