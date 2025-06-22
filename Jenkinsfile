@@ -45,20 +45,7 @@ pipeline {
                 script {
                     withCredentials([usernamePassword(credentialsId: 'mysql-cred', usernameVariable: 'USER_NAME', passwordVariable: 'MYSQL_PASSWORD')]) {
                         sh """
-
-                    mysql -h $SQL_LINK -u $USER_NAME -p$MYSQL_PASSWORD -e "CREATE DATABASE IF NOT EXISTS test;
-                        USE test;
-                        CREATE TABLE IF NOT EXISTS USER (
-                          id INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,
-                          first_name VARCHAR(45) NOT NULL,
-                          last_name VARCHAR(45) NOT NULL,
-                          email VARCHAR(45) NOT NULL,
-                          username VARCHAR(45) NOT NULL,
-                          password VARCHAR(45) NOT NULL,
-                          regdate DATE NOT NULL,
-                          PRIMARY KEY (id)
-                        ) ENGINE=InnoDB DEFAULT CHARSET=latin1;"
-
+                    mysql -h $SQL_LINK -u $USER_NAME -p$MYSQL_PASSWORD < mysql.sql
                 """
                     }
                 }
