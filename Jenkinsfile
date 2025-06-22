@@ -2,6 +2,11 @@ pipeline {
     agent {
         label 'built-in'
     }
+    tools{
+        git 'git-install'
+        maven 'maven-install'
+    }
+
     stages {
         stage('env-variables') {
             steps {
