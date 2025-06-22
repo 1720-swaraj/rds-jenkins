@@ -14,7 +14,7 @@ pipeline {
             steps {
                 cleanWs()
                 checkout scm
-                sh '$WORKSPACE'
+                echo "$WORKSPACE"
             }
         }
         stage('mvn clean install'){
