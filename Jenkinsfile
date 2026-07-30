@@ -2,6 +2,7 @@ pipeline {
     agent any
     tools {
         git 'git-install'
+	maven 'maven-install'
     }
 
     stages {
