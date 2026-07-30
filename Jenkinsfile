@@ -1,7 +1,5 @@
 pipeline {
-    agent {
-        label 'built-in'
-    }
+    agent any
     tools {
         git 'git-install'
         maven 'maven-install'
@@ -11,7 +9,7 @@ pipeline {
         stage('env-variables') {
             steps {
                 script {
-                    env.SQL_LINK = 'database-2.ccl0s6sc4bn5.us-east-1.rds.amazonaws.com'
+                    env.SQL_LINK = 'database-1.cxeugcm6ok4m.ap-south-1.rds.amazonaws.com'
                 }
             }
         }
@@ -32,11 +30,11 @@ pipeline {
         stage('copy .war file') {
             steps {
                 script {
-                    def fileName = '/mnt/tools/apache-tomcat-9.0.106/webapps/LoginWebApp.war'
+                    def fileName = '/root/apache-tomcat-9.0.120/webapps/LoginWebApp.war'
                     if (fileExists(fileName)) {
                         sh "rm -rf ${fileName}"
                     }
-                    sh "cp ${WORKSPACE}/target/LoginWebApp.war /mnt/tools/apache-tomcat-9.0.106/webapps/"
+                    sh "cp ${WORKSPACE}/target/LoginWebApp.war /root/apache-tomcat-9.0.106/webapps/"
                 }
             }
         }
@@ -46,7 +44,7 @@ pipeline {
                     withCredentials([usernamePassword(credentialsId: 'mysql-cred', usernameVariable: 'USER_NAME', passwordVariable: 'MYSQL_PASSWORD')]) {
                         sh """
                     mysql -h $SQL_LINK -u $USER_NAME -p$MYSQL_PASSWORD < mysql.sql
-                    
+
                 """
                     }
                 }
@@ -54,3 +52,4 @@ pipeline {
         }
     }
 }
+
